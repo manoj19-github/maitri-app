@@ -2,6 +2,8 @@ name: maitri_app
 description: A Very Good Project created by Very Good CLI.
 version: 1.0.0+1
 publish_to: none
+assets:
+  - .env
 
 environment:
   sdk: ">=2.19.0 <3.0.0"
@@ -17,12 +19,28 @@ dependencies:
   intl: ^0.19.0
   api_repository:
     path: packages/api_repository
+  shared:
+    path: packages/shared
+  powersync_repository:
+    path: packages/powersync_repository
   l10m: ^0.4.3
   path_provider: ^2.1.5
   hydrated_bloc: ^9.1.5
+  envied: ^1.0.0
+  flutter_dotenv: ^5.2.1
+  dotenv: ^4.2.0
+  supabase_flutter: ^2.8.2
+  powersync: ^1.10.0
+  firebase_core: ^3.9.0
+  firebase_auth: ^5.3.4
+  google_sign_in: ^6.2.2
+  get_it: ^8.0.3
+  supabase_auth_ui: ^0.5.4
 
 dev_dependencies:
   bloc_test: ^9.1.1
+  build_runner: ^2.4.14
+  envied_generator: ^1.0.0
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
