@@ -1,3 +1,4 @@
+import "package:app_ui/app_ui.dart";
 import 'package:api_repository/api_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -9,7 +10,9 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:maitri_app/counter/counter.dart';
 import 'package:maitri_app/l10n/l10n.dart';
 import 'package:maitri_app/login/login.dart';
+import 'package:maitri_app/theme/app_theme.dart';
 import 'package:path_provider/path_provider.dart';
+
 
 class AppView extends StatelessWidget {
   final ApiRepository apiRepository;
@@ -17,6 +20,7 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return MultiBlocProvider(
       providers: [
         BlocProvider<CounterCubit>(create: (_) => CounterCubit()),
@@ -24,12 +28,9 @@ class AppView extends StatelessWidget {
       child: BlocBuilder<CounterCubit, int>(
         builder: (context, mode) => MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-            colorScheme: ColorScheme.fromSwatch(
-              accentColor: const Color(0xFF13B9FF),
-            ),
-          ),
+          theme: const AppTheme().theme,
+          themeMode: ThemeMode.system,
+          darkTheme: const AppDarkTheme().theme,
           // localizationsDelegates: AppLocalizations.localizationsDelegates,
           // supportedLocales: AppLocalizations.supportedLocales,
           home: LoginView(),

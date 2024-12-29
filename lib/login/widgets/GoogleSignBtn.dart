@@ -1,3 +1,4 @@
+import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 
 class Googlesignbtn extends StatelessWidget {
@@ -6,13 +7,22 @@ class Googlesignbtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(Icons.auto_awesome),
-      label: Text(
-        "Google Sign In",
-        style: Theme.of(context).textTheme.headlineSmall,
-      ),
+    return Tappable(
+        onTap: onPressed,
+        backgroundColor: context.theme.focusColor,
+        fadeStrength: FadeStrength.lg,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+
+        // icon: Assets.icons.google.svg(height: 24, width: 24),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.md,
+              vertical: AppSpacing.xs + AppSpacing.xxs),
+          child: Text(
+            "Google Sign In",
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        )
     );
   }
 }

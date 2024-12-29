@@ -18,11 +18,11 @@ class LogoutBtn extends StatelessWidget {
             if (session == null) return const SizedBox.shrink();
             return ElevatedButton.icon(
                 onPressed: logoutHandler,
-                icon: Icon(Icons.logout),
+                icon: Icon(Icons.logout, color: Colors.red),
                 label: Text('Logout',
                     style: Theme.of(context)
                         .textTheme
-                        .headlineSmall
+                        .bodyLarge
                         ?.apply(color: Colors.red)));
           }
           return const SizedBox.shrink();

@@ -4,3 +4,4 @@ library;
 export "src/config/config.dart";
 export "src/models/models.dart";
 export "src/models/schema.dart";
+export "src/config/throttler.dart";
