@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:maitri_app/auth/view/login_page.dart';
 import 'package:maitri_app/counter/counter.dart';
 import 'package:maitri_app/l10n/l10n.dart';
 import 'package:maitri_app/login/login.dart';
@@ -33,7 +34,7 @@ class AppView extends StatelessWidget {
           darkTheme: const AppDarkTheme().theme,
           // localizationsDelegates: AppLocalizations.localizationsDelegates,
           // supportedLocales: AppLocalizations.supportedLocales,
-          home: LoginView(),
+          home: LoginPage(),
         ),
       ),
     );

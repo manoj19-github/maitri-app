@@ -8,3 +8,5 @@ export "src/spacing/app_spacing.dart";
 export "src/extensions/build_context_extension.dart";
 export "src/extensions/text_style_extension.dart";
 export "src/widgets/tappable.dart";
+export "src/widgets/app_logo.dart";
+export "src/widgets/app_text_field.dart";

@@ -124,6 +124,14 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/applogo1.png
+  AssetGenImage get applogo1 =>
+      const AssetGenImage('assets/images/applogo1.png');
+
+  /// File path: assets/images/applogo2.png
+  AssetGenImage get applogo2 =>
+      const AssetGenImage('assets/images/applogo2.png');
+
   /// File path: assets/images/chat-background_light_mask.png
   AssetGenImage get chatBackgroundLightMask =>
       const AssetGenImage('assets/images/chat-background_light_mask.png');
@@ -140,6 +148,10 @@ class $AssetsImagesGen {
   SvgGenImage get instagramTextLogo =>
       const SvgGenImage('assets/images/instagram_text_logo.svg');
 
+  /// File path: assets/images/lightlogo-removebg-preview.png
+  AssetGenImage get lightlogoRemovebgPreview =>
+      const AssetGenImage('assets/images/lightlogo-removebg-preview.png');
+
   /// File path: assets/images/placeholder.png
   AssetGenImage get placeholder =>
       const AssetGenImage('assets/images/placeholder.png');
@@ -150,10 +162,13 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        applogo1,
+        applogo2,
         chatBackgroundLightMask,
         chatBackgroundDarkMask,
         chatBackgroundLightOverlay,
         instagramTextLogo,
+        lightlogoRemovebgPreview,
         placeholder,
         profilePhoto
       ];
