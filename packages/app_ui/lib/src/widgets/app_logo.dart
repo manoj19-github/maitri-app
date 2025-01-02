@@ -13,7 +13,7 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (context.isDark)
+    if (MediaQuery.of(context).platformBrightness == Brightness.dark)
       return Assets.images.applogo1
           .image(width: width, height: height, fit: fit);
     return Assets.images.applogo2.image(width: width, height: height, fit: fit);

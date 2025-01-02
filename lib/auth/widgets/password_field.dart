@@ -45,11 +45,23 @@ class _EmailFieldState extends State<PasswordField> {
   Widget build(BuildContext context) {
     final passwordErrorText =
         context.select((LoginCubit cubit) => cubit.state.password.errorMessage);
+    final isShowPassword =
+        context.select((LoginCubit cubit) => cubit.state.showPassword);
+    print("isShowPassword >>>> ${isShowPassword}");
     return AppTextField(
         filled: true,
         textController: _passwordField,
         focusNode: _passwordFocusNode,
         textInputType: TextInputType.visiblePassword,
+        obscureText: !isShowPassword,
+        suffixIcon: IconButton(
+          icon: Icon(!isShowPassword ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+            context
+                .read<LoginCubit>()
+                .changePasswordVisibility(!isShowPassword);
+          },
+        ),
         errorText: passwordErrorText,
         textInputAction: TextInputAction.done,
         onChanged: (value) => _debouncer.run(() {

@@ -10,3 +10,4 @@ export "src/extensions/text_style_extension.dart";
 export "src/widgets/tappable.dart";
 export "src/widgets/app_logo.dart";
 export "src/widgets/app_text_field.dart";
+export "src/widgets/app_button.dart";

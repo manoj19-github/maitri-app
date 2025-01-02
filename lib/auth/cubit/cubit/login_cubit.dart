@@ -11,6 +11,8 @@ import 'package:shared/shared.dart';
 
 part 'login_state.dart';
 
+
+
 class LoginCubit extends Cubit<LoginState> {
   // LoginCubit({
   //   required UserRepository userRepository,
@@ -19,9 +21,11 @@ class LoginCubit extends Cubit<LoginState> {
 
   LoginCubit() : super(LoginState.initial());
 
-  void changePasswordVisibility() => emit(
-        state.copyWith(showPassword: !state.showPassword),
+  void changePasswordVisibility(bool _showPassword) {
+    emit(
+      state.copyWith(showPassword: _showPassword),
       );
+  }
 
   void resetState() => emit(LoginState.initial());
 
@@ -39,7 +43,7 @@ class LoginCubit extends Cubit<LoginState> {
           );
 
     final newScreenState = state.copyWith(
-      email: previousEmailState,
+      email: newEmailState,
     );
 
     emit(newScreenState);
@@ -121,32 +125,32 @@ class LoginCubit extends Cubit<LoginState> {
   //   }
   // }
 
-  // Future<void> onSubmit() async {
-  //   final email = Email.dirty(state.email.value);
-  //   final password = Password.dirty(state.password.value);
-  //   final isFormValid = FormValid([email, password]).isFormValid;
+  Future<void> onSubmit() async {
+    final email = Email.dirty(state.email.value);
+    final password = Password.dirty(state.password.value);
+    final isFormValid = FormzValid([email, password]).isFormValid;
 
-  //   final newState = state.copyWith(
-  //     email: email,
-  //     password: password,
-  //     status: isFormValid ? LogInSubmissionStatus.loading : null,
-  //   );
+    final newState = state.copyWith(
+      email: email,
+      password: password,
+      status: isFormValid ? LogInSubmissionStatus.loading : null,
+    );
 
-  //   emit(newState);
+    emit(newState);
 
-  //   if (!isFormValid) return;
+    if (!isFormValid) return;
 
-  //   try {
-  //     // await _userRepository.logInWithPassword(
-  //     //   email: email.value,
-  //     //   password: password.value,
-  //     // );
-  //     final newState = state.copyWith(status: LogInSubmissionStatus.success);
-  //     emit(newState);
-  //   } catch (e, stackTrace) {
-  //     _errorFormatter(e, stackTrace);
-  //   }
-  // }
+    try {
+      // await _userRepository.logInWithPassword(
+      //   email: email.value,
+      //   password: password.value,
+      // );
+      final newState = state.copyWith(status: LogInSubmissionStatus.success);
+      emit(newState);
+    } catch (e, stackTrace) {
+      // _errorFormatter(e, stackTrace);
+    }
+  }
 
   // void _errorFormatter(Object e, StackTrace stackTrace) {
   //   addError(e, stackTrace);
