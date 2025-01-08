@@ -41,6 +41,23 @@ enum LogInSubmissionStatus {
       isNetworkError ||
       isInvalidCredentials;
 }
+extension LogInSubmissionStatusX on LogInSubmissionStatus {
+  bool get isSuccess => this == LogInSubmissionStatus.success;
+  bool get isLoading => this == LogInSubmissionStatus.loading;
+  bool get isGoogleAuthInProgress =>
+      this == LogInSubmissionStatus.googleAuthInProgress;
+  bool get isGithubAuthInProgress =>
+      this == LogInSubmissionStatus.githubAuthInProgress;
+  bool get isInvalidCredentials =>
+      this == LogInSubmissionStatus.invalidCredentials;
+  bool get isNetworkError => this == LogInSubmissionStatus.networkError;
+  bool get isUserNotFound => this == LogInSubmissionStatus.userNotFound;
+  bool get isError =>
+      this == LogInSubmissionStatus.error ||
+      isUserNotFound ||
+      isNetworkError ||
+      isInvalidCredentials;
+}
 
 
 enum LoginStatus { initial, loading, success, error }
@@ -60,7 +77,7 @@ class LoginState extends Equatable {
   LoginState.initial()
       : this._(
             showPassword: false,
-            status: LogInSubmissionStatus.initial,
+            status: LogInSubmissionStatus.idle,
             email: Email.pure(),
             password: Password.pure());
 
