@@ -29,11 +29,11 @@ class SupabaseAuthenticationClient implements AuthenticationClient {
   ///
   /// Emits [AuthencticationClient.anonymous] if the user is not authenticated.
   @override
-  Stream<AuthencticationClient> get user {
+  Stream<AuthenticationUser> get user {
     return _powerSyncRepository.authStateChanges().map((state) {
       final supabaseUser = state.session?.user;
       return supabaseUser == null
-          ? AuthencticationClient.anonymous
+          ? AuthenticationUser.anonymous
           : supabaseUser.toUser;
     });
   }
@@ -67,6 +67,7 @@ class SupabaseAuthenticationClient implements AuthenticationClient {
   Future<void> logInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
+      print("googleUser  ${googleUser}");
       if (googleUser == null) {
         throw const LogInWithGoogleCanceled(
           'Sign in with Google canceled. No user found!',
@@ -94,24 +95,7 @@ class SupabaseAuthenticationClient implements AuthenticationClient {
     }
   }
 
-  /// Starts the Sign In with Github Flow.
-  ///
-  /// Throws a [LogInWithGithubCanceled] if the flow is canceled by the user.
-  /// Throws a [LogInWithGithubFailure] if an exception occurs.
-  @override
-  Future<void> logInWithGithub() async {
-    try {
-      await _powerSyncRepository.supabase.auth.signInWithOAuth(
-        OAuthProvider.github,
-        redirectTo:
-            kIsWeb ? null : 'io.supabase.flutterquickstart://login-callback/',
-      );
-    } on LogInWithGithubCanceled {
-      rethrow;
-    } catch (error, stackTrace) {
-      Error.throwWithStackTrace(LogInWithGithubFailure(error), stackTrace);
-    }
-  }
+
 
   @override
   Future<void> signUpWithPassword({

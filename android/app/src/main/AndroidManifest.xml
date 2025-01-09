@@ -12,10 +12,10 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
    <application
-        android:label="maitri_app"
+        android:label="Maitri"
         android:name="${applicationName}"
         android:requestLegacyExternalStorage="true"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

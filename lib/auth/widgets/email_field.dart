@@ -49,6 +49,7 @@ class _EmailFieldState extends State<EmailField> {
         filled: true,
         textController: _emailController,
         focusNode: _emailFocusNode,
+        // hintStyle: const TextStyle(color: Colors.deepPurpleAccent),
         textInputType: TextInputType.emailAddress,
         errorText: emailErrorText,
         textInputAction: TextInputAction.next,

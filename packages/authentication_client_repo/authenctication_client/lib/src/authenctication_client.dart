@@ -170,8 +170,8 @@ abstract class AuthenticationClient {
 
   /// Starts the Sign In with Github Flow.
   ///
-  /// Throws a [LogInWithGithubFailure] if an exception occurs.
-  Future<void> logInWithGithub();
+  // /// Throws a [LogInWithGithubFailure] if an exception occurs.
+  // Future<void> logInWithGithub();
 
   /// Signs up with the provided [email] and [password].
   ///

@@ -51,10 +51,12 @@ class _EmailFieldState extends State<PasswordField> {
     return AppTextField(
         filled: true,
         textController: _passwordField,
+        // hintStyle: const TextStyle(color: Colors.deepPurpleAccent),
         focusNode: _passwordFocusNode,
         textInputType: TextInputType.visiblePassword,
         obscureText: !isShowPassword,
         suffixIcon: IconButton(
+          color: Colors.deepPurpleAccent,
           icon: Icon(!isShowPassword ? Icons.visibility : Icons.visibility_off),
           onPressed: () {
             context

@@ -1,0 +1,20 @@
+name: user_repository
+description: A Very Good Project created by Very Good CLI.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+dependencies:
+  authenctication_client:
+    path: ../authentication_client_repo/authenctication_client
+  rxdart: ^0.28.0
+  shared:
+    path: ../shared
+  powersync_repository:
+    path: ../powersync_repository
+
+dev_dependencies:
+  mocktail: ^1.0.4
+  test: ^1.25.8
+  very_good_analysis: ^6.0.0

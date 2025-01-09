@@ -14,11 +14,14 @@ import 'package:maitri_app/l10n/l10n.dart';
 import 'package:maitri_app/login/login.dart';
 import 'package:maitri_app/theme/app_theme.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:user_repository/user_repository.dart';
 
 
 class AppView extends StatelessWidget {
   final ApiRepository apiRepository;
-  AppView({super.key, required this.apiRepository});
+  final UserRepository userRepository;
+  AppView(
+      {super.key, required this.apiRepository, required this.userRepository});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,8 @@ class AppView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CounterCubit>(create: (_) => CounterCubit()),
-        BlocProvider<LoginCubit>(create: (_) => LoginCubit()),
+        BlocProvider<LoginCubit>(
+            create: (_) => LoginCubit(userRepository: userRepository)),
       ],
       child: BlocBuilder<CounterCubit, int>(
         builder: (context, mode) => MaterialApp(

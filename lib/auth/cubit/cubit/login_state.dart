@@ -68,12 +68,14 @@ class LoginState extends Equatable {
   final Email email;
   final Password password;
   final bool showPassword;
+  final LoginErrorMessage? errorMessage;
 
   const LoginState._(
       {required this.status,
       required this.email,
       required this.password,
-      required this.showPassword});
+      required this.showPassword,
+      this.errorMessage});
   LoginState.initial()
       : this._(
             showPassword: false,
@@ -81,20 +83,25 @@ class LoginState extends Equatable {
             email: Email.pure(),
             password: Password.pure());
 
-  @override
-  List<Object> get props => [status, email, password, showPassword];
 
   LoginState copyWith({
     LogInSubmissionStatus? status,
     Email? email,
     Password? password,
     bool? showPassword,
+    String? errorMessage,
+    
   }) {
     return LoginState._(
       status: status ?? this.status,
       showPassword: showPassword ?? this.showPassword,
       email: email ?? this.email,
       password: password ?? this.password,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
+
+  
+  @override
+  List<Object> get props => [status, email, password, showPassword];
 }

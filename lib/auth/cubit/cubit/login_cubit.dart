@@ -6,20 +6,23 @@ import 'package:equatable/equatable.dart';
 import 'package:form_fields/form_fields.dart';
 import 'package:powersync_repository/powersync_repository.dart';
 import 'package:shared/shared.dart';
-// import 'package:supabase_authentication_client/supabase_authentication_client.dart';
-// import 'package:user_repository/user_repository.dart';
+import 'package:user_repository/user_repository.dart';
+import 'package:supabase_auth_client/supabase_auth_client.dart';
+import 'package:user_repository/user_repository.dart';
+import "package:authenctication_client/authenctication_client.dart";
 
 part 'login_state.dart';
 
 
 
 class LoginCubit extends Cubit<LoginState> {
-  // LoginCubit({
-  //   required UserRepository userRepository,
-  // })  : _userRepository = userRepository,
-  //       super(const LoginState.initial());\
+  LoginCubit({
+    required UserRepository userRepository,
+  })  : _userRepository = userRepository,
+        super(LoginState.initial());
 
-  LoginCubit() : super(LoginState.initial());
+
+  final UserRepository _userRepository;
 
   void changePasswordVisibility(bool _showPassword) {
     emit(
@@ -29,7 +32,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   void resetState() => emit(LoginState.initial());
 
-  /// Email value was changed, triggering new changes in state.
+  // Email value was changed, triggering new changes in state.
   void onEmailChanged(String newValue) {
     final previousScreenState = state;
     final previousEmailState = previousScreenState.email;
@@ -101,29 +104,19 @@ class LoginCubit extends Cubit<LoginState> {
     emit(initialState);
   }
 
-  // Future<void> loginWithGoogle() async {
-  //   emit(state.copyWith(status: LogInSubmissionStatus.googleAuthInProgress));
-  //   try {
-  //     // await _userRepository.logInWithGoogle();
-  //     emit(state.copyWith(status: LogInSubmissionStatus.success));
-  //   } on LogInWithGoogleCanceled {
-  //     emit(state.copyWith(status: LogInSubmissionStatus.idle));
-  //   } catch (error, stackTrace) {
-  //     _errorFormatter(error, stackTrace);
-  //   }
-  // }
+  Future<void> loginWithGoogle() async {
+    emit(state.copyWith(status: LogInSubmissionStatus.googleAuthInProgress));
+    try {
+      await _userRepository.logInWithGoogle();
+      emit(state.copyWith(status: LogInSubmissionStatus.success));
+    } on LogInWithGoogleCanceled {
+      emit(state.copyWith(status: LogInSubmissionStatus.idle));
+    } catch (error, stackTrace) {
+      _errorFormatter(error, stackTrace);
+    }
+  }
 
-  // Future<void> loginWithGithub() async {
-  //   emit(state.copyWith(status: LogInSubmissionStatus.githubAuthInProgress));
-  //   try {
-  //     await _userRepository.logInWithGithub();
-  //     emit(state.copyWith(status: LogInSubmissionStatus.success));
-  //   } on LogInWithGithubCanceled {
-  //     emit(state.copyWith(status: LogInSubmissionStatus.idle));
-  //   } catch (error, stackTrace) {
-  //     _errorFormatter(error, stackTrace);
-  //   }
-  // }
+
 
   Future<void> onSubmit() async {
     final email = Email.dirty(state.email.value);
@@ -141,33 +134,34 @@ class LoginCubit extends Cubit<LoginState> {
     if (!isFormValid) return;
 
     try {
-      // await _userRepository.logInWithPassword(
-      //   email: email.value,
-      //   password: password.value,
-      // );
+      await _userRepository.logInWithPassword(
+        email: email.value,
+        password: password.value,
+      );
       final newState = state.copyWith(status: LogInSubmissionStatus.success);
       emit(newState);
     } catch (e, stackTrace) {
-      // _errorFormatter(e, stackTrace);
+      _errorFormatter(e, stackTrace);
     }
   }
 
-  // void _errorFormatter(Object e, StackTrace stackTrace) {
-  //   addError(e, stackTrace);
-  //   // final status = switch (e) {
-  //   //   LogInWithPasswordFailure(:final AuthException error) => switch (
-  //   //         error.statusCode?.parse) {
-  //   //       HttpStatus.badRequest => LogInSubmissionStatus.invalidCredentials,
-  //   //       _ => LogInSubmissionStatus.error,
-  //   //     },
-  //   //   LogInWithGoogleFailure => LogInSubmissionStatus.googleLogInFailure,
-  //   //   _ => LogInSubmissionStatus.idle,
-  //   // };
+  void _errorFormatter(Object e, StackTrace stackTrace) {
+    addError(e, stackTrace);
 
-  //   final newState = state.copyWith(
-  //     status: status,
-  //     message: e.toString(),
-  //   );
-  //   emit(newState);
-  // }
+    // final status = switch (e) {
+    //   case e
+    //   LogInWithPasswordFailure(:final AuthException error) => switch (
+    //         error.statusCode?.parse) {
+    //       HttpStatus.badRequest => LogInSubmissionStatus.invalidCredentials,
+    //       _ => LogInSubmissionStatus.error,
+    //     },
+    //   LogInWithGoogleFailure => LogInSubmissionStatus.googleLogInFailure,
+    //   _ => LogInSubmissionStatus.idle,
+    // };
+
+    final newState = state.copyWith(
+      status: LogInSubmissionStatus.error,
+    );
+    emit(newState);
+  }
 }

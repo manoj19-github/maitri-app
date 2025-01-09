@@ -11,3 +11,5 @@ export "src/widgets/tappable.dart";
 export "src/widgets/app_logo.dart";
 export "src/widgets/app_text_field.dart";
 export "src/widgets/app_button.dart";
+export "src/widgets/text_app_divider.dart";
+export "src/widgets/app_circular_progress.dart";
