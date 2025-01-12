@@ -7,7 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:maitri_app/auth/cubit/cubit/login_cubit.dart';
+import 'package:maitri_app/auth/cubit/authtype_cubit.dart';
+import 'package:maitri_app/auth/cubit/login_cubit.dart';
+import 'package:maitri_app/auth/cubit/login_cubit.dart';
+import 'package:maitri_app/auth/view/auth_view.dart';
 import 'package:maitri_app/auth/view/login_page.dart';
 import 'package:maitri_app/counter/counter.dart';
 import 'package:maitri_app/l10n/l10n.dart';
@@ -29,6 +32,7 @@ class AppView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<CounterCubit>(create: (_) => CounterCubit()),
+        BlocProvider<AuthtypeCubit>(create: (_) => AuthtypeCubit()),
         BlocProvider<LoginCubit>(
             create: (_) => LoginCubit(userRepository: userRepository)),
       ],
@@ -40,7 +44,7 @@ class AppView extends StatelessWidget {
           darkTheme: const AppDarkTheme().theme,
           // localizationsDelegates: AppLocalizations.localizationsDelegates,
           // supportedLocales: AppLocalizations.supportedLocales,
-          home: LoginPage(),
+          home: AuthView(),
         ),
       ),
     );

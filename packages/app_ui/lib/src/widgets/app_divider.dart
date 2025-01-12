@@ -11,7 +11,11 @@ class AppDivider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveColor =     MediaQuery.of(context).platformBrightness == Brightness.dark ? AppColors.emphasizeDarkGrey : AppColors.emphasizeGrey;
-    return Divider(height: height,indent: indent,endIndent: endIndent,color: color ?? effectiveColor,)
+    return Divider(
+        height: height,
+        indent: indent,
+        endIndent: endIndent,
+        color: color ?? effectiveColor);
   }
 }
 

@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options_dev.dart';
+/// import 'firebase_options.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -59,4 +59,5 @@ class DefaultFirebaseOptions {
     projectId: 'maitri-2',
     storageBucket: 'maitri-2.firebasestorage.app',
   );
+
 }
