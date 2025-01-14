@@ -5,11 +5,6 @@ import 'package:app_ui/app_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
-/// AvatarImagePicker displays a circular avatar image that can be uploaded
-/// from the device.
-///
-/// Tapping the avatar opens an image picker to select a new image.
-/// Provides option to compress images before uploading.
 class AvatarImagePicker extends StatelessWidget {
   const AvatarImagePicker({
     this.compress = true,
@@ -34,31 +29,31 @@ class AvatarImagePicker extends StatelessWidget {
   /// bytes and file to the provided callback.
   ///
   /// Handles compressing the image before returning it.
-  Future<void> _pickImage(BuildContext context) async {
-    final file = await PickImage().pickImage(
-      context,
-      pickAvatar: true,
-      source: ImageSource.both,
-    );
-    if (file == null) return;
+  // Future<void> _pickImage(BuildContext context) async {
+  //   final file = await PickImage().pickImage(
+  //     context,
+  //     pickAvatar: true,
+  //     source: ImageSource.both,
+  //   );
+  //   if (file == null) return;
 
-    final selectedFile = file.selectedFiles.firstOrNull;
-    if (selectedFile == null) return;
-    final compressed =
-        await ImageCompress.compressFile(selectedFile.selectedFile);
-    final compressedFile = compressed == null ? null : File(compressed.path);
-    final newFile = compressedFile ?? selectedFile.selectedFile;
-    final compressedBytes = compressedFile == null
-        ? null
-        : await PickImage().imageBytes(file: compressedFile);
-    final bytes = compressedBytes ?? selectedFile.selectedByte;
-    onUpload?.call(bytes, newFile);
-  }
+  //   final selectedFile = file.selectedFiles.firstOrNull;
+  //   if (selectedFile == null) return;
+  //   final compressed =
+  //       await ImageCompress.compressFile(selectedFile.selectedFile);
+  //   final compressedFile = compressed == null ? null : File(compressed.path);
+  //   final newFile = compressedFile ?? selectedFile.selectedFile;
+  //   final compressedBytes = compressedFile == null
+  //       ? null
+  //       : await PickImage().imageBytes(file: compressedFile);
+  //   final bytes = compressedBytes ?? selectedFile.selectedByte;
+  //   onUpload?.call(bytes, newFile);
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Tappable.faded(
-      onTap: () => _pickImage.call(context),
+      // onTap: () => _pickImage.call(context),
       child: Stack(
         children: [
           CircleAvatar(
@@ -82,7 +77,7 @@ class AvatarImagePicker extends StatelessWidget {
               width: 36,
               height: 36,
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.deepPurpleAccent,
                 shape: BoxShape.circle,
                 border: Border.all(
                   width: 2,

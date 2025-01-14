@@ -25,6 +25,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.19.0
+  maitri_blocks_ui:
+    path: packages/maitri_blocks_ui
   form_fields:
     path: packages/form_fields
   api_repository:

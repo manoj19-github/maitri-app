@@ -10,6 +10,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:maitri_app/auth/cubit/authtype_cubit.dart';
 import 'package:maitri_app/auth/cubit/login_cubit.dart';
 import 'package:maitri_app/auth/cubit/login_cubit.dart';
+import 'package:maitri_app/auth/cubit/signup_cubit.dart';
 import 'package:maitri_app/auth/view/auth_view.dart';
 import 'package:maitri_app/auth/view/login_page.dart';
 import 'package:maitri_app/counter/counter.dart';
@@ -35,6 +36,10 @@ class AppView extends StatelessWidget {
         BlocProvider<AuthtypeCubit>(create: (_) => AuthtypeCubit()),
         BlocProvider<LoginCubit>(
             create: (_) => LoginCubit(userRepository: userRepository)),
+        BlocProvider<SignupCubit>(
+            create: (_) => SignupCubit(userRepository: userRepository)),
+        
+        
       ],
       child: BlocBuilder<CounterCubit, int>(
         builder: (context, mode) => MaterialApp(

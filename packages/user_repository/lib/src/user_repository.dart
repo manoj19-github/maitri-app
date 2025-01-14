@@ -74,7 +74,7 @@ class UserRepository {
   Future<void> signUpWithPassword({
     required String password,
     required String fullName,
-    required String username,
+    
     String? avatarUrl,
     String? email,
     String? phone,
@@ -86,7 +86,7 @@ class UserRepository {
         phone: phone,
         password: password,
         fullName: fullName,
-        username: username,
+        username: "",
         avatarUrl: avatarUrl,
         pushToken: pushToken,
       );
